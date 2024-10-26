@@ -1,4 +1,4 @@
-(deftemplate aeronave
+(deftemplate aeronave ;;IMPORTANTE: PUEDES HACER UN ASSERT DE UNA PLANTILLA SIN RELLENAR SUS CAMPOS
     (slot id_ae)
     (slot id_o)
     (slot id_d)
