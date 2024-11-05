@@ -14,7 +14,7 @@ class tEstado:
     cC: int
 
 #No hay proceso derrivado: no hago constructor
-    
+
 
 operadores = {
     "1": "ARRIBA_A",
