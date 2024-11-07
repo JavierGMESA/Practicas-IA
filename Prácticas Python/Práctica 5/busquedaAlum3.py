@@ -68,7 +68,7 @@ def expandirNoRepetidos2(nodo: Nodo, cerrados: set) -> list:
     for op in NUM_OPERADORES:
         if esValido(op, nodo.estado):
             estado = aplicaOperador(op, nodo.estado)
-            if not (estado.crearHash() in cerrados):
+            if not (estado.crearHash() in cerrados): #IMPORTANTE: COMPROBAMOS SI ESTÁ EN LA TABLA HASH
                 nuevo = Nodo(estado, op, nodo.costeCamino + coste(op, nodo.estado), nodo.profundidad + 1, nodo)
                 nodos.append(nuevo)
 
@@ -136,7 +136,7 @@ def busquedaProfundidadLimitada(limite) -> bool:
         if(testObjetivo(actual.estado)):
             objetivo = True
         else:
-            if actual.profundidad < limite:
+            if actual.profundidad < limite:     #CONTROL DEL LÍMITE
                 sucesores = expandir(actual)
                 abiertos = sucesores + abiertos
 
@@ -162,7 +162,7 @@ def busquedaProfundidadLimitadaIterativa() -> bool:
             actual = abiertos.pop(0)
             if(testObjetivo(actual.estado)):
                 objetivo = True
-            else:
+            else:   
                 if actual.profundidad < limite:
                     sucesores = expandir(actual)
                     abiertos = sucesores + abiertos
@@ -231,7 +231,7 @@ def busquedaAnchuraNoRepetidos2() -> bool:
     objetivo = False
     raiz = nodoInicial()
     abiertos = []
-    cerrados = set()
+    cerrados = set()            #IMPORTANTE: PARA OPTIMIZAR USAMOS UNA TABLA HASH (UN SET DONDE GUARDAMOS LOS IDENTIFICADORES DE LOS ESTADOS YA PROCESADOS)
     sucesores = []
     
     abiertos.append(raiz)

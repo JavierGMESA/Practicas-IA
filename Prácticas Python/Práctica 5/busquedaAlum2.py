@@ -151,7 +151,7 @@ def busquedaProfundidadLimitadaIterativa() -> bool:
             if(testObjetivo(actual.estado)):
                 objetivo = True
             else:
-                if actual.profundidad < limite:
+                if actual.profundidad < limite:     #CONTROL DEL LÍMITE
                     sucesores = expandir(actual)
                     abiertos = sucesores + abiertos
         limite += 1
@@ -167,7 +167,7 @@ def busquedaAnchuraNoRepetidos() -> bool:
     objetivo = False
     raiz = nodoInicial()
     abiertos = []
-    cerrados = []
+    cerrados = []           #LISTA DE CERRADOS PARA CONTROLAR LOS QUE YA SE HAN PROCESADO
     sucesores = []
     
     abiertos.append(raiz)
