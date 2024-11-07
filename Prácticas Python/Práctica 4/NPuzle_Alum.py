@@ -71,7 +71,7 @@ def esValido(operador: str, estado: tEstado) -> bool:
             valido = (estado.fila < 2)
         case "IZQUIERDA":
             valido = (estado.col > 0)
-        case "Derecha":
+        case "DERECHA":
             valido = (estado.col < 2)
 
     return valido
