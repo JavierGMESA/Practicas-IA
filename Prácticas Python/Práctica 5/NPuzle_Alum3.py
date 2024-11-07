@@ -20,6 +20,9 @@ class tEstado:
 
     def __repr__(self) -> str: # Permite representar el objeto como cadena
         return f"{self.tablero}\n Fila: {self.fila}\n Col: {self.col}\n"
+    
+    def crearHash(self) -> str: #IMPORTANTE: FUNCIÓN QUE DEVUELVE UN HASH (IDENTIFICADOR) DEL TABLERO
+        return f"{self.tablero.tobytes()}{self.fila}{self.col}"
 
 
 def estadoInicial() -> tEstado:

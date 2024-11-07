@@ -61,6 +61,19 @@ def expandirNoRepetidos(nodo: Nodo, cerrados: list) -> list:
 
     return nodos
 
+def expandirNoRepetidos2(nodo: Nodo, cerrados: set) -> list:
+    nodos: list
+    nodos = []
+    NUM_OPERADORES = ["8", "2", "4", "6"]
+    for op in NUM_OPERADORES:
+        if esValido(op, nodo.estado):
+            estado = aplicaOperador(op, nodo.estado)
+            if not (estado.crearHash() in cerrados):
+                nuevo = Nodo(estado, op, nodo.costeCamino + coste(op, nodo.estado), nodo.profundidad + 1, nodo)
+                nodos.append(nuevo)
+
+    return nodos
+
 
 def busquedaAnchura() -> bool:
     objetivo = False
@@ -162,7 +175,7 @@ def busquedaProfundidadLimitadaIterativa() -> bool:
 
     return objetivo
 
-def busquedaAnchuraNoRepetidos() -> bool:
+def busquedaAnchuraNoRepetidos1() -> bool:
     objetivo = False
     raiz = nodoInicial()
     abiertos = []
@@ -188,7 +201,7 @@ def busquedaAnchuraNoRepetidos() -> bool:
 
     return objetivo
 
-def busquedaProfundidadNoRepetidos() -> bool:
+def busquedaProfundidadNoRepetidos1() -> bool:
     objetivo = False
     raiz = nodoInicial()
     abiertos = []
@@ -204,6 +217,58 @@ def busquedaProfundidadNoRepetidos() -> bool:
         else:
             cerrados.append(actual)
             sucesores = expandirNoRepetidos(actual, cerrados)
+            for sucesor in sucesores[::-1]:
+                abiertos.insert(0, sucesor)
+
+    if objetivo:
+        dispSolucion(actual)
+    elif not objetivo:
+        print("No se ha encontrado solución")
+
+    return objetivo
+
+def busquedaAnchuraNoRepetidos2() -> bool:
+    objetivo = False
+    raiz = nodoInicial()
+    abiertos = []
+    cerrados = set()
+    sucesores = []
+    
+    abiertos.append(raiz)
+    
+    while not(objetivo) and not(len(abiertos) == 0):
+        actual = abiertos.pop(0)
+        #print(actual.estado.tablero)
+        if(testObjetivo(actual.estado)):
+            objetivo = True
+        else:
+            cerrados.add(actual.estado.crearHash())
+            sucesores = expandirNoRepetidos2(actual, cerrados)
+            abiertos += sucesores
+
+    if objetivo:
+        dispSolucion(actual)
+    elif not objetivo:
+        print("No se ha encontrado solución")
+
+    return objetivo
+
+def busquedaProfundidadNoRepetidos2() -> bool:
+    objetivo = False
+    raiz = nodoInicial()
+    abiertos = []
+    cerrados = set()
+    sucesores = []
+
+    abiertos.append(raiz)
+    
+    while not(objetivo) and not(len(abiertos) == 0):
+        actual = abiertos.pop(0)
+        if(testObjetivo(actual.estado)):
+            objetivo = True
+        else:
+            cerrados.add(actual.estado.crearHash())
+            sucesores = expandirNoRepetidos2(actual, cerrados)
             for sucesor in sucesores[::-1]:
                 abiertos.insert(0, sucesor)
 

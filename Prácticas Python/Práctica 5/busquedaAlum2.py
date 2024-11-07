@@ -43,14 +43,19 @@ def expandir(nodo: Nodo) -> list:
 
     return nodos
 
-def expandirNoRepetidos(nodo: Nodo, cerrados: set) -> list:
+def expandirNoRepetidos(nodo: Nodo, cerrados: list) -> list:
     nodos: list
     nodos = []
     NUM_OPERADORES = ["8", "2", "4", "6"]
     for op in NUM_OPERADORES:
         if esValido(op, nodo.estado):
             estado = aplicaOperador(op, nodo.estado)
-            if estado.crearHash() in cerrados:
+            i = 0
+            coincide = False
+            while(i < len(cerrados) and not coincide):
+                coincide = (iguales(cerrados[i].estado, estado))
+                i += 1
+            if not coincide:
                 nuevo = Nodo(estado, op, nodo.costeCamino + coste(op, nodo.estado), nodo.profundidad + 1, nodo)
                 nodos.append(nuevo)
 
@@ -162,7 +167,7 @@ def busquedaAnchuraNoRepetidos() -> bool:
     objetivo = False
     raiz = nodoInicial()
     abiertos = []
-    cerrados = set()
+    cerrados = []
     sucesores = []
     
     abiertos.append(raiz)
@@ -173,7 +178,7 @@ def busquedaAnchuraNoRepetidos() -> bool:
         if(testObjetivo(actual.estado)):
             objetivo = True
         else:
-            cerrados.add(actual.estado.crearHash())
+            cerrados.append(actual)
             sucesores = expandirNoRepetidos(actual, cerrados)
             abiertos += sucesores
 
@@ -188,7 +193,7 @@ def busquedaProfundidadNoRepetidos() -> bool:
     objetivo = False
     raiz = nodoInicial()
     abiertos = []
-    cerrados = set()
+    cerrados = []
     sucesores = []
 
     abiertos.append(raiz)
@@ -198,7 +203,7 @@ def busquedaProfundidadNoRepetidos() -> bool:
         if(testObjetivo(actual.estado)):
             objetivo = True
         else:
-            cerrados.add(actual.estado.crearHash())
+            cerrados.append(actual)
             sucesores = expandirNoRepetidos(actual, cerrados)
             for sucesor in sucesores[::-1]:
                 abiertos.insert(0, sucesor)
