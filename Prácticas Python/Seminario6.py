@@ -68,10 +68,17 @@ def estadoObjetivo():
 
 #IMPORTANTE
 #FUNCIÓN HEURÍSTICA QUE DEVUELVE UN COSTE BASADO EN LAS DISTANCIAS DE MANHATAN ENTRE LA
-#POSICIÓN ACTUAL DE LAS PIEZAS Y LA POSICIÓN
+#POSICIÓN ACTUAL DE LAS PIEZAS Y LA POSICIÓN OBJETIVO
 def h(estado: tEstado) -> int:
     objetivo = estadoObjetivo()
     return abs(estado.fA - objetivo.fA) + abs(estado.fB - objetivo.fC) + abs(estado.fC - objetivo.fC) + abs(estado.cA - objetivo.cA) + abs(estado.cB - objetivo.cB) + abs(estado.cC - objetivo.cC)
+
+#IMPORTANTE
+#FUNCIÓN DE EVALUACIÓN QUE DEVUELVE UN COSTE BASADO EN LAS DISTANCIAS DE MANHATAN ENTRE LA
+#POSICIÓN ACTUAL DE LAS PIEZAS Y LA POSICIÓN OBJETIVO MÁS EL COSTE DE LLEGAR DE LA RAIZ AL 
+#NODO ACTUAL (ALGORITMO A*)
+def f(Actual) -> int:
+    return Actual.coste + h(Actual.estado)
 
 def esValido (op, estado):
     valido = False
