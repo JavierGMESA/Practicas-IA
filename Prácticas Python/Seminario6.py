@@ -1,4 +1,4 @@
-#MISMO PROBLEMA DE NPUZLE PERO CON BÚSQUEDA HEURÍSTICA
+#MISMO PROBLEMA DEl DE LAS 3 PIEZAS PERO CON BÚSQUEDA HEURÍSTICA
 from dataclasses import dataclass
 import numpy as np
 from copy import deepcopy
