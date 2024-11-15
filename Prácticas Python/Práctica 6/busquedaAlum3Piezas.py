@@ -79,6 +79,7 @@ def expandirNoRepetidos2(nodo: Nodo, cerrados: set) -> list:
 def expandirNoRepetidosHeuristica(nodo: Nodo, cerrados: list) -> list:
     nodos: list
     nodos = []
+    coincide: bool
     NUM_OPERADORES = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
     for op in NUM_OPERADORES:
         if esValido(op, nodo.estado):
@@ -87,9 +88,9 @@ def expandirNoRepetidosHeuristica(nodo: Nodo, cerrados: list) -> list:
             i = 0
             coincide = False
             while(i < len(cerrados) and not coincide):
-                coincide = (iguales(cerrados[i].estado, estado))
+                coincide = (iguales(cerrados[i].estado, estado) and (f(cerrados[i-1]) <= f(nuevo)))
                 i += 1
-            if not coincide or f(cerrados[i - 1]) > f(nuevo):
+            if not coincide:
                 nodos.append(nuevo)
 
     return nodos
@@ -316,7 +317,7 @@ def BusquedaHeuristicaVoraz() -> bool:
             objetivo = True
         else:
             sucesores = expandir(actual)
-            for sucesor in sucesores[::-1]:
+            for sucesor in sucesores:
                 i = 0
                 while(i < len(abiertos) and f(sucesor) >= f(abiertos[i])):
                     i += 1
@@ -352,7 +353,7 @@ def BusquedaHeuristicaVorazNoRepetidos() -> bool:
         else:
             cerrados.append(actual)
             sucesores = expandirNoRepetidosHeuristica(actual, cerrados)
-            for sucesor in sucesores[::-1]:
+            for sucesor in sucesores:
                 i = 0
                 while(i < len(abiertos) and f(sucesor) >= f(abiertos[i])):
                     i += 1
