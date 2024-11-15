@@ -87,7 +87,8 @@ def expandirNoRepetidosHeuristica(nodo: Nodo, cerrados: list) -> list:
             i = 0
             coincide = False
             while(i < len(cerrados) and not coincide):
-                coincide = (iguales(cerrados[i].estado, estado) and (f(cerrados[i-1]) <= f(nuevo)))
+                coincide = (iguales(cerrados[i].estado, estado) and (f(cerrados[i-1]) <= f(nuevo))) #IMPORTANTE: NO SE TIENE EN CUENTA SI YA SE
+                                                                                                    #HA PROCESADO Y TIENE UN VALOR f(x) MAYOR 
                 i += 1
             if not coincide:
                 nodos.append(nuevo)
@@ -318,7 +319,8 @@ def BusquedaHeuristicaVoraz() -> bool:
             sucesores = expandir(actual)
             for sucesor in sucesores:
                 i = 0
-                while(i < len(abiertos) and f(sucesor) >= f(abiertos[i])):
+                while(i < len(abiertos) and f(sucesor) >= f(abiertos[i])): #IMPORTANTE: HAY QUE INSERTAR EL SUCESOR EN LA LISTA DE ABIERTOS HACIENDO
+                                                                           #QUE SIGA SIENDO UNA COLA ASCENDENTE
                     i += 1
                 if(i == len(abiertos)):
                     abiertos.append(sucesor)
