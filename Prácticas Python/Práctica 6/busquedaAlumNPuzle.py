@@ -79,7 +79,7 @@ def expandirNoRepetidos2(nodo: Nodo, cerrados: set) -> list:
 def expandirNoRepetidosHeuristica(nodo: Nodo, cerrados: list) -> list:
     nodos: list
     nodos = []
-    NUM_OPERADORES = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    NUM_OPERADORES = ["8", "2", "4", "6"]
     for op in NUM_OPERADORES:
         if esValido(op, nodo.estado):
             estado = aplicaOperador(op, nodo.estado)
