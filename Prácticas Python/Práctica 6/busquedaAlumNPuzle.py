@@ -87,7 +87,7 @@ def expandirNoRepetidosHeuristica(nodo: Nodo, cerrados: list) -> list:
             i = 0
             coincide = False
             while(i < len(cerrados) and not coincide):
-                coincide = (iguales(cerrados[i].estado, estado) and (f(cerrados[i-1]) <= f(nuevo))) #IMPORTANTE: NO SE TIENE EN CUENTA SI YA SE
+                coincide = (iguales(cerrados[i].estado, estado) and (f(cerrados[i]) <= f(nuevo))) #IMPORTANTE: NO SE TIENE EN CUENTA SI YA SE
                                                                                                     #HA PROCESADO Y TIENE UN VALOR f(x) MAYOR 
                 i += 1
             if not coincide:
