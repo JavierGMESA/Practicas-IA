@@ -76,6 +76,24 @@ def expandirNoRepetidos2(nodo: Nodo, cerrados: set) -> list:
 
     return nodos
 
+def expandirNoRepetidosHeuristica(nodo: Nodo, cerrados: list) -> list:
+    nodos: list
+    nodos = []
+    NUM_OPERADORES = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    for op in NUM_OPERADORES:
+        if esValido(op, nodo.estado):
+            estado = aplicaOperador(op, nodo.estado)
+            nuevo = Nodo(estado, op, nodo.costeCamino + coste(op, nodo.estado), nodo.profundidad + 1, nodo)
+            i = 0
+            coincide = False
+            while(i < len(cerrados) and not coincide):
+                coincide = (iguales(cerrados[i].estado, estado))
+                i += 1
+            if not coincide or f(cerrados[i - 1]) > f(nuevo):
+                nodos.append(nuevo)
+
+    return nodos
+
 def busquedaAnchura() -> bool:
     objetivo = False
     raiz = nodoInicial()
@@ -217,7 +235,7 @@ def busquedaProfundidadNoRepetidos1() -> bool:
             objetivo = True
         else:
             cerrados.append(actual)
-            sucesores = expandirNoRepetidos(actual, cerrados)
+            sucesores = expandirNoRepetidosHeuristica(actual, cerrados)
             for sucesor in sucesores[::-1]:
                 abiertos.insert(0, sucesor)
 
@@ -319,7 +337,7 @@ def BusquedaHeuristicaVorazNoRepetidos() -> bool:
     raiz = nodoInicial()
     abiertos = []
     sucesores = []
-    cerrados = set()
+    cerrados = []
 
     abiertos.append(raiz)
     
@@ -332,8 +350,8 @@ def BusquedaHeuristicaVorazNoRepetidos() -> bool:
         if(testObjetivo(actual.estado)):
             objetivo = True
         else:
-            cerrados.add(actual.estado.crearHash())
-            sucesores = expandirNoRepetidos2(actual, cerrados)
+            cerrados.append(actual)
+            sucesores = expandirNoRepetidosHeuristica(actual, cerrados)
             for sucesor in sucesores[::-1]:
                 i = 0
                 while(i < len(abiertos) and f(sucesor) >= f(abiertos[i])):
