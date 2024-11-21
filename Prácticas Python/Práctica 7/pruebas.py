@@ -44,12 +44,10 @@ b2.BusquedaAEstrellaManhattan(tablero3)
 
 #IMPORTANTE: RESPUESTAS A LAS PREGUNTAS
 # b) ¿Son Admisibles ambas heurísticas?
-# La distancia de Manhattan por supuesto, pues siempre nos devuelve un coste menor o igual que
-# el coste real. La de piezas mal colocadas no es admisible, pues por ejemplo, si tenemos 2 piezas
-# adyacentes mal colocadas donde una es el hueco, la heurística devolverá 2, cuando el coste real
-# de moverlas es 1.
+# Ambas son admisibles pues generan un coste estimado menor o igual que es coste real siempre
 # c) ¿Cuál es la heurística dominante?
-# La de Distancias de Manhattan pues genera menos nodos
+# La de Distancias de Manhattan pues genera menos nodos. ESO SI, LA DISTANCIA DE MANHATTAN ES ADMISIBLE
+# SI NO SE TIENE EN CUENTA EL HUECO COMO PIEZA MAL COLOCADA
 # d) ¿En qué afecta el cambio de orden en los operadores (optimalidad, completitud, eficiencia,
 # etc.)?
 # En el número de nodos Generados (pues su orden puede conducir antes a otra solución), los nodos
