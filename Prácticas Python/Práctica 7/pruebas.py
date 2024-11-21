@@ -49,7 +49,7 @@ b2.BusquedaAEstrellaManhattan(tablero3)
 # adyacentes mal colocadas donde una es el hueco, la heurística devolverá 2, cuando el coste real
 # de moverlas es 1.
 # c) ¿Cuál es la heurística dominante?
-# La de Distancias de Manhattan
+# La de Distancias de Manhattan pues genera menos nodos
 # d) ¿En qué afecta el cambio de orden en los operadores (optimalidad, completitud, eficiencia,
 # etc.)?
 # En el número de nodos Generados (pues su orden puede conducir antes a otra solución), los nodos
