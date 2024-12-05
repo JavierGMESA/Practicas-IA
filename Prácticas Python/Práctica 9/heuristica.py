@@ -170,8 +170,8 @@ def valorMin_ab(nodo: Nodo, prof: int, alfa: int, beta: int) -> int:
             i += 1
         vmin = beta
 
-        if i < len(jugadas):
-            print("Se ha podado")
+        #if i < len(jugadas):
+        #    print("Se ha podado")
     
     return vmin
 
@@ -195,7 +195,7 @@ def valorMax_ab(nodo: Nodo, prof: int, alfa: int, beta: int) -> int:
             i += 1
         vmax = alfa
 
-        if(i < len(jugadas)):
-            print("Se ha podado")
+        #if(i < len(jugadas)):
+        #    print("Se ha podado")
     
     return vmax
