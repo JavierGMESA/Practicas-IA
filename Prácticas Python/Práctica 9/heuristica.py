@@ -1,6 +1,6 @@
 from tictactoeAlum import *
 
-LIMITE = 3
+limite_ab = 3
 
 def PSEUDOminimax(nodo):
     mejorJugada = -1
@@ -97,8 +97,8 @@ def valorMinHeuristico(nodo: Nodo, profundidad: int, limite: int) -> int:
     elif profundidad == limite:
         valor_min = h(nodo)
 
-        print(valor_min)
-        print(nodo)
+        #print(valor_min)
+        #print(nodo)
     else:
         valor_min = 100000
         for j in jugadas:
@@ -119,8 +119,8 @@ def valorMaxHeuristico(nodo: Nodo, profundidad: int, limite: int) -> int:
     elif profundidad == limite:
         valor_max = h(nodo)
 
-        print(valor_max)
-        print(nodo)
+        #print(valor_max)
+        #print(nodo)
     else:
         valor_max = -100000
         for j in jugadas:
@@ -133,8 +133,8 @@ def valorMaxHeuristico(nodo: Nodo, profundidad: int, limite: int) -> int:
 
 def poda_ab(nodo: Nodo) -> Nodo:
     jugador = 1
-    alfa = 100000
-    beta = -100000
+    alfa = -100000
+    beta = 100000
     prof = 0
 
     mejor_jugada = jugadas[0]
@@ -153,12 +153,12 @@ def valorMin_ab(nodo: Nodo, prof: int, alfa: int, beta: int) -> int:
     if terminal(nodo):
         vmin = utilidad(nodo)
 
-        print(nodo)
-    elif prof == LIMITE:
+        #print(nodo)
+    elif prof == limite_ab:
         vmin = h(nodo)
 
-        print(vmin)
-        print(nodo)
+        #print(vmin)
+        #print(nodo)
     else:
         i = 0
         while i < len(jugadas) and alfa < beta:
@@ -169,18 +169,21 @@ def valorMin_ab(nodo: Nodo, prof: int, alfa: int, beta: int) -> int:
                 
             i += 1
         vmin = beta
+
+        if i < len(jugadas):
+            print("Se ha podado")
     
     return vmin
 
 def valorMax_ab(nodo: Nodo, prof: int, alfa: int, beta: int) -> int:
     if terminal(nodo):
         vmax = utilidad(nodo)
-        print(nodo)
-    elif prof == LIMITE:
+        #print(nodo)
+    elif prof == limite_ab:
         vmax = h(nodo)
 
-        print(vmax)
-        print(nodo)
+        #print(vmax)
+        #print(nodo)
     else:
         i = 0
         while i < len(jugadas) and alfa < beta:
@@ -191,5 +194,8 @@ def valorMax_ab(nodo: Nodo, prof: int, alfa: int, beta: int) -> int:
             
             i += 1
         vmax = alfa
+
+        if(i < len(jugadas)):
+            print("Se ha podado")
     
     return vmax

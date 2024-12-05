@@ -158,19 +158,23 @@ def utilidad(nodo: Nodo) -> int:
 
     #raise NotImplementedError
 
+# FUNCIÓN HEURÍSTICA DEL TRES EN RAYA
+# SE COMPRUEBAN TODAS LAS COMBINACIONES PARA GANAR (FILAS, COLUMNAS Y DIAGONALES).
+# SI EN UNA COMBINACIÓN SOLO PUEDE GANAR MAX SUMAMOS +1, SI SOLO PUEDE GANAR MIN
+# SUMAMOS -1, Y SI NO PUEDE GANAR NINGUNO O PUEDEN GANAR AMBOS NO SUMAMOS NADA
 def h(nodo: Nodo) -> int:
     puntuacion = 0
 
     tab = nodo.tablero.reshape(9)
     for v in victorias:
         posible_punt = 0
-        if tab[v[0]] != 0.0:
+        if tab[v[0]] != 0.0:                #Si hay una ficha colocada se guarda el valor
             posible_punt = tab[v[0]]
-        if tab[v[1]] != 0.0:
-            if tab[v[1]] != posible_punt:
-                if posible_punt != 0:
-                    posible_punt = -2
-                else:
+        if tab[v[1]] != 0.0:                #Si hay una ficha colocada hacer:
+            if tab[v[1]] != posible_punt:   #Si la ficha colocada no coincide con el valor guardado
+                if posible_punt != 0:       #Si en la casilla anterior no había ficha guardar el valor de la ficha colocada
+                    posible_punt = -2       
+                else:                           #Si había ficha y no coinciden se guarda -2 (coincidencia)
                     posible_punt = tab[v[1]]
         if tab[v[2]] != 0.0 and posible_punt != -2:
             if tab[v[2]] != posible_punt:
