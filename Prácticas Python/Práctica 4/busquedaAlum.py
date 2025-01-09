@@ -53,7 +53,7 @@ def busquedaAnchura() -> bool:
     abiertos.append(raiz)
     
     while not(objetivo) and not(len(abiertos) == 0):
-        actual = abiertos.pop(0)
+        actual = abiertos.pop(0)                        #IMPORTANTE: SACAR EL PRIMERO DE LA LISTA
         if(testObjetivo(actual.estado)):
             objetivo = True
         else:
