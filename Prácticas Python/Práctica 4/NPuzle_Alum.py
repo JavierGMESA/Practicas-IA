@@ -52,7 +52,7 @@ def dispOperador(operador: str) -> None:
 
 def iguales(actual: tEstado, objetivo: tEstado) -> bool:
     iguales = False
-    iguales = (actual.tablero == objetivo.tablero).all()
+    iguales = (actual.tablero == objetivo.tablero).all()        #IMPORTANTE: COMPARAR MATRICES CON UNA SOLA INSTRUCCIÓN
     
     return iguales
 
