@@ -35,8 +35,8 @@
 )
 
 (deffunction tiempM (?v ?d)
-    (bind ?m (mod ?d ?v))
-    (bind ?v (div ?v 60))
+    (bind ?m (mod ?d ?v))       ;IMPORTANTE: DIVISIÓN
+    (bind ?v (div ?v 60))       ;IMPORTANTE: MÓDULO
     (bind ?r (div ?m ?v))
     (return ?r)
 )
