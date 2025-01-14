@@ -63,7 +63,7 @@ def testObjetivo(actual: tEstado) -> bool:
 
 
 def esValido(operador: str, estado: tEstado) -> bool:
-    valido = False
+    valido = False                                              #IMPORTANTE: EMPEZAMOS CON valida A False
     match operadores[operador]:
         case "ARRIBA":
             valido = (estado.fila > 0)
