@@ -44,8 +44,8 @@
 )
 
 (defrule Supera_Intentos
-    (declare (salience 50)) ;;IMPORTANTE: PRIORIDADES
-    ?tar <- (Tarjeta (Intentos 0) (DNI ?dni))
+    (declare (salience 50))                             ;;IMPORTANTE: PRIORIDADES
+    ?tar <- (Tarjeta (Intentos 0) (DNI ?dni))           ;;IMPORTANTE: NO HACE FALTA GUARDAR TODOS LAS CARACTERÍSTICAS DE LA PLANTILLA EN LA REGLA
     ?us <- (Usuario (DNI ?dni))
     => (printout t "La tarjeta se ha quedado sin intentos" crlf)
     (modify ?tar (Validacion No)) ;;NO HACE FALTA
